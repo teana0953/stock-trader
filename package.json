@@ -5,8 +5,8 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "prebuild": "node prebuild.js",
-        "build": "vue-cli-service build && npm run build:doc",
-        "build:doc": "vue-cli-service build --dest docs"
+        "build": "vue-cli-service build",
+        "postbuild": "node postbuild.js"
     },
     "dependencies": {
         "bootstrap": "^4.5.2",
@@ -19,6 +19,7 @@
         "@vue/cli-plugin-babel": "~4.5.0",
         "@vue/cli-plugin-router": "~4.5.0",
         "@vue/cli-service": "~4.5.0",
+        "fs-extra": "^9.0.1",
         "vue-template-compiler": "^2.6.11"
     }
 }
