@@ -1,7 +1,7 @@
 <template>
-    <b-container>
+    <b-container class="app">
         <app-header />
-        <b-row>
+        <b-row class="app__content">
             <b-col xs="12">
                 <router-view />
             </b-col>
@@ -21,5 +21,9 @@ export default {
 <style>
 body {
     padding: 30px;
+}
+
+.app__content {
+    margin-top: 20px;
 }
 </style>
