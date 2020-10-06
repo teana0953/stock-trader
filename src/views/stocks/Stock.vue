@@ -1,6 +1,6 @@
 <template>
     <b-col class="stock" sm="6" md="4">
-        <b-card class="stock__card" header-tag="header" header-bg-variant="success">
+        <b-card class="stock__card" header-tag="header" header-bg-variant="light">
             <template v-slot:header>
                 <strong>{{ stock.name }} </strong>
                 <small>(Price: {{ stock.price }})</small>
@@ -10,7 +10,7 @@
                     <b-form-input v-model.number="quantity" class="stock__card__col__input" type="number" placeholder="Quantity"></b-form-input>
                 </b-col>
                 <b-col class="stock__card__col stock__card__col--center">
-                    <b-button class="stock__card__col__button" variant="success" @click="buyStock" :disabled="quantity <= 0 || !Number.isInteger(quantity)">Buy</b-button>
+                    <b-button class="stock__card__col__button" variant="info" @click="buyStock" :disabled="quantity <= 0 || !Number.isInteger(quantity)">Buy</b-button>
                 </b-col>
             </b-row>
         </b-card>
