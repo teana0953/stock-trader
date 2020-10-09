@@ -9,7 +9,6 @@
                 <b-nav-item to="/portfolio">Portfolio</b-nav-item>
                 <b-nav-item to="/stocks">Stocks</b-nav-item>
             </b-navbar-nav>
-
             <b-navbar-nav class="ml-auto">
                 <b-nav-item right>End Day</b-nav-item>
                 <b-nav-item-dropdown right>
@@ -20,11 +19,20 @@
                     <b-dropdown-item href="#">Save Data</b-dropdown-item>
                     <b-dropdown-item href="#">Load Data</b-dropdown-item>
                 </b-nav-item-dropdown>
+                 <b-nav-text right>
+                    <strong>Funds: {{ funds }}</strong>
+                </b-nav-text>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
 </template>
 
 <script>
-export default {};
+export default {
+    computed: {
+        funds: function() {
+            return this.$store.getters.funds;
+        },
+    },
+};
 </script>
