@@ -10,7 +10,7 @@
                 <b-nav-item to="/stocks">Stocks</b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
-                <b-nav-item right>End Day</b-nav-item>
+                <b-nav-item right @click="endDay">End Day</b-nav-item>
                 <b-nav-item-dropdown right>
                     <!-- Using 'button-content' slot -->
                     <template v-slot:button-content>
@@ -28,11 +28,19 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     computed: {
         funds: function() {
             return this.$store.getters.funds;
         },
     },
+    methods: {
+        ...mapActions(['randomizeStocks']),
+        endDay() {
+            this.randomizeStocks();
+        }
+    }
 };
 </script>
