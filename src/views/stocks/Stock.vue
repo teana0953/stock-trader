@@ -7,7 +7,7 @@
             </template>
             <b-row align-content="center">
                 <b-col lg="8" class="stock__card__col">
-                    <b-form-input number="true" v-model.number="quantity" :state="!isInsufficientFunds ? null : false" class="stock__card__col__input" type="number" placeholder="Quantity" debounce="500" aria-invalid="false"></b-form-input>
+                    <b-form-input v-model.number="quantity" :state="!isInsufficientFunds ? null : false" class="stock__card__col__input" type="number" placeholder="Quantity" debounce="500" aria-invalid="false"></b-form-input>
                     <b-form-invalid-feedback>
                         Insufficient Funds
                     </b-form-invalid-feedback>
