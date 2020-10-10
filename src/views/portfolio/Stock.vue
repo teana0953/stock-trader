@@ -7,7 +7,10 @@
             </template>
             <b-row align-content="center">
                 <b-col lg="8" class="stock__card__col">
-                    <b-form-input v-model.number="quantity" class="stock__card__col__input" type="number" placeholder="Quantity"></b-form-input>
+                    <b-form-input number="true" v-model.number="quantity" :state="!insufficientQuantity ? null : false" class="stock__card__col__input" type="number" placeholder="Quantity"  debounce="500"></b-form-input>
+                    <b-form-invalid-feedback>
+                        Quantity not enough
+                    </b-form-invalid-feedback>
                 </b-col>
                 <b-col class="stock__card__col stock__card__col--center">
                     <b-button class="stock__card__col__button" variant="info" @click="sellStock" :disabled="quantity <= 0 || !Number.isInteger(quantity)">Sell</b-button>
@@ -27,9 +30,14 @@ export default {
             quantity: 0,
         };
     },
+    computed: {
+        insufficientQuantity() {
+            return this.quantity > this.stock.quantity;
+        },
+    },
     methods: {
         ...mapActions({
-            placeSellOrder: 'sellStock'
+            placeSellOrder: 'sellStock',
         }),
         sellStock() {
             const order = {

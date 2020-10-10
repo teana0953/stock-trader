@@ -7,10 +7,15 @@
             </template>
             <b-row align-content="center">
                 <b-col lg="8" class="stock__card__col">
-                    <b-form-input v-model.number="quantity" class="stock__card__col__input" type="number" placeholder="Quantity"></b-form-input>
+                    <b-form-input number="true" v-model.number="quantity" :state="!isInsufficientFunds ? null : false" class="stock__card__col__input" type="number" placeholder="Quantity" debounce="500" aria-invalid="false"></b-form-input>
+                    <b-form-invalid-feedback>
+                        Insufficient Funds
+                    </b-form-invalid-feedback>
                 </b-col>
                 <b-col class="stock__card__col stock__card__col--center">
-                    <b-button class="stock__card__col__button" variant="info" @click="buyStock" :disabled="quantity <= 0 || !Number.isInteger(quantity)">Buy</b-button>
+                    <b-button class="stock__card__col__button" variant="info" @click="buyStock" :disabled="!canBuy">
+                        Buy
+                    </b-button>
                 </b-col>
             </b-row>
         </b-card>
@@ -24,6 +29,17 @@ export default {
         return {
             quantity: 0,
         };
+    },
+    computed: {
+        funds() {
+            return this.$store.getters.funds;
+        },
+        isInsufficientFunds() {
+            return this.stock.price * this.quantity > this.funds;
+        },
+        canBuy() {
+            return !this.isInsufficientFunds && this.quantity > 0 && Number.isInteger(this.quantity);
+        },
     },
     methods: {
         buyStock() {
