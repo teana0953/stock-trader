@@ -17,7 +17,7 @@
                         Save & Load
                     </template>
                     <b-dropdown-item @click="saveData">Save Data</b-dropdown-item>
-                    <b-dropdown-item>Load Data</b-dropdown-item>
+                    <b-dropdown-item @click="loadData">Load Data</b-dropdown-item>
                 </b-nav-item-dropdown>
                 <b-nav-text right>
                     <strong>Funds: {{ funds | currency }}</strong>
@@ -38,7 +38,10 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['randomizeStocks']),
+        ...mapActions({
+            randomizeStocks: 'randomizeStocks',
+            fetchData: 'loadData'
+        }),
         endDay() {
             this.randomizeStocks();
         },
@@ -51,6 +54,9 @@ export default {
 
             MainServer.put('data.json', data);
         },
+        loadData() {
+            this.fetchData();
+        }
     },
 };
 </script>
