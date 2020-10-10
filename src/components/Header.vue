@@ -16,10 +16,10 @@
                     <template v-slot:button-content>
                         Save & Load
                     </template>
-                    <b-dropdown-item href="#">Save Data</b-dropdown-item>
-                    <b-dropdown-item href="#">Load Data</b-dropdown-item>
+                    <b-dropdown-item @click="saveData">Save Data</b-dropdown-item>
+                    <b-dropdown-item>Load Data</b-dropdown-item>
                 </b-nav-item-dropdown>
-                 <b-nav-text right>
+                <b-nav-text right>
                     <strong>Funds: {{ funds | currency }}</strong>
                 </b-nav-text>
             </b-navbar-nav>
@@ -29,6 +29,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { MainServer } from '../server/index';
 
 export default {
     computed: {
@@ -40,7 +41,16 @@ export default {
         ...mapActions(['randomizeStocks']),
         endDay() {
             this.randomizeStocks();
-        }
-    }
+        },
+        saveData() {
+            const data = {
+                funds: this.$store.getters.funds,
+                stockPortfolio: this.$store.getters.stockPortfolio,
+                stocks: this.$store.getters.stocks,
+            };
+
+            MainServer.put('data.json', data);
+        },
+    },
 };
 </script>
