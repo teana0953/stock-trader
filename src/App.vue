@@ -50,7 +50,7 @@ body {
     }
 }
 
-@keyframes slide-in {
+@keyframes slide-out {
     from {
         transform: translateY(0);
         opacity: 1;
