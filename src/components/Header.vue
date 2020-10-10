@@ -20,7 +20,7 @@
                     <b-dropdown-item href="#">Load Data</b-dropdown-item>
                 </b-nav-item-dropdown>
                  <b-nav-text right>
-                    <strong>Funds: {{ funds }}</strong>
+                    <strong>Funds: {{ funds | currency }}</strong>
                 </b-nav-text>
             </b-navbar-nav>
         </b-collapse>

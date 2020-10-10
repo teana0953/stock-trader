@@ -12,6 +12,10 @@ Vue.config.productionTip = false;
 // Install BootstrapVue
 Vue.use(BootstrapVue);
 
+Vue.filter('currency', (value) => {
+    return `$${value.toLocaleString()}`;
+});
+
 new Vue({
     store,
     router,
